@@ -101,45 +101,39 @@ checksum = "a31eee39dddec8330830986fcd7625edb5a24ec90ea038215273bbc3adb08ac6"
 
 [[package]]
 name = "dff-meta"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e0a3f3bc1ee45e53ed8182c6a06af4505c9a24ff4d3303a0d0c36d5ce46bf1ac"
+checksum = "c8469682bbb41dfdb69f94a702d0c23946e88b8fdb8436657a49a41166c1dfdb"
 dependencies = [
+ "dsd-source",
  "id3",
 ]
 
 [[package]]
-name = "dsd-reader"
-version = "0.3.1"
+name = "dsd-source"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cc21ce62c7793f67d64011a1ecbdbcae42ab9f5825bd8ffe18b5dfcd11e46107"
 dependencies = [
- "dff-meta",
- "dsf-meta",
  "id3",
- "log",
 ]
 
 [[package]]
 name = "dsf-meta"
-version = "0.2.7"
+version = "0.2.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fa1d4230005238406c7e20c6e966ad2e3e516cd42fb81d3818c9607c8367bb8d"
+checksum = "7885a6d9435b5f201abe8176843e45a7f2f1c4f8e8c3402a1420c7133d5fdfb0"
 dependencies = [
+ "dsd-source",
  "id3",
  "sampled_data_duration",
 ]
 
 [[package]]
-name = "dst-decoder"
-version = "0.1.2"
-dependencies = [
- "anyhow",
-]
-
-[[package]]
 name = "either"
-version = "1.18.0"
+version = "1.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "252afb9ae5eaa683babdc6a068b3f5726eb19e05070c731f9b2a23a7c3e8ed34"
+checksum = "0e9c71c2167ca323c882b99918929403426e2373ea17242ff5653e0d5e1058be"
 
 [[package]]
 name = "encoding_rs"
@@ -173,9 +167,9 @@ checksum = "da7c62ceae207dd37ea5b845da6a0696c799f85e97da1ab5b7910be3c1c80223"
 
 [[package]]
 name = "flac-codec"
-version = "1.3.2"
+version = "1.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3a62dbcc8c85ee094d1380035e631f9c236fb610bd49d3eaa41ad839ff2e2cc"
+checksum = "59c7588004ca8c0d0c6fce15a02c0bdca964d94a83a73e45680a6874d551d405"
 dependencies = [
  "arrayvec",
  "bitstream-io",
@@ -201,8 +195,19 @@ checksum = "899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd"
 dependencies = [
  "cfg-if",
  "libc",
- "r-efi",
+ "r-efi 5.3.0",
  "wasip2",
+]
+
+[[package]]
+name = "getrandom"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "300e883d756b2e4ec94e02791f39b04b522276138852cfc41d9fb7e904106099"
+dependencies = [
+ "cfg-if",
+ "libc",
+ "r-efi 6.0.0",
 ]
 
 [[package]]
@@ -335,6 +340,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
 
 [[package]]
+name = "r-efi"
+version = "6.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f8dcc9c7d52a811697d2151c701e0d08956f92b0e24136cf4cf27b57a6a0d9bf"
+
+[[package]]
 name = "rand"
 version = "0.9.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -360,7 +371,7 @@ version = "0.9.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "76afc826de14238e6e8c374ddcc1fa19e374fd8dd986b0d2af0d02377261d83c"
 dependencies = [
- "getrandom",
+ "getrandom 0.3.4",
 ]
 
 [[package]]
@@ -381,17 +392,6 @@ checksum = "22e18b0f0062d30d4230b2e85ff77fdfe4326feb054b9783a3460d8435c8ab91"
 dependencies = [
  "crossbeam-deque",
  "crossbeam-utils",
-]
-
-[[package]]
-name = "rdsd2pcm"
-version = "0.4.0"
-dependencies = [
- "dsd-reader",
- "flac-codec",
- "id3",
- "log",
- "rand",
 ]
 
 [[package]]
@@ -445,15 +445,46 @@ checksum = "e3a9fe34e3e7a50316060351f37187a3f546bce95496156754b601a5fa71b76e"
 
 [[package]]
 name = "smallvec"
-version = "1.16.2"
+version = "1.16.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9395f0f0eee849a9b707b2f06bb92a6a422090e2123bb2ef8e87a0e61892a8e"
+checksum = "5b3dc8af474f516a851ff4bd12db780f948b9250ad37211e4eec0bccea54e01b"
+
+[[package]]
+name = "sotf-dsd-reader"
+version = "0.3.1"
+source = "git+https://github.com/pierreaubert/sotf-3rdparties#54a6bf14eaae8fd8bd465af522e980379fbdf43c"
+dependencies = [
+ "dff-meta",
+ "dsf-meta",
+ "id3",
+ "log",
+]
+
+[[package]]
+name = "sotf-dst-decoder"
+version = "0.1.2"
+source = "git+https://github.com/pierreaubert/sotf-3rdparties#54a6bf14eaae8fd8bd465af522e980379fbdf43c"
+dependencies = [
+ "anyhow",
+]
+
+[[package]]
+name = "sotf-rdsd2pcm"
+version = "0.4.0"
+source = "git+https://github.com/pierreaubert/sotf-3rdparties#54a6bf14eaae8fd8bd465af522e980379fbdf43c"
+dependencies = [
+ "flac-codec",
+ "id3",
+ "log",
+ "rand",
+ "sotf-dsd-reader",
+]
 
 [[package]]
 name = "symphonia-codec-dsd"
 version = "0.2.0"
 dependencies = [
- "rdsd2pcm",
+ "sotf-rdsd2pcm",
  "symphonia-core",
  "thiserror",
 ]
@@ -463,8 +494,8 @@ name = "symphonia-codec-dst"
 version = "0.2.0"
 dependencies = [
  "anyhow",
- "dst-decoder",
- "rdsd2pcm",
+ "sotf-dst-decoder",
+ "sotf-rdsd2pcm",
  "symphonia-core",
  "thiserror",
 ]
@@ -508,7 +539,7 @@ version = "0.1.2"
 dependencies = [
  "encoding_rs",
  "rayon",
- "rdsd2pcm",
+ "sotf-rdsd2pcm",
  "symphonia-codec-dsd",
  "symphonia-codec-dst",
  "symphonia-core",
@@ -550,9 +581,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "3.0.6"
+version = "3.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8593e8e72159ed2257d083c7a454a85cbf854f37a0966d8d483aff8c8a3ebcee"
+checksum = "d62a2e0561533f2ca2561d0cf27fd9fedb640a1bf2616ff5d5c80d99017faadc"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -566,7 +597,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32497e9a4c7b38532efcdebeef879707aa9f794296a4f0244f6f69e9bc8574bd"
 dependencies = [
  "fastrand",
- "getrandom",
+ "getrandom 0.4.3",
  "once_cell",
  "rustix",
  "windows-sys",
@@ -589,7 +620,7 @@ checksum = "fe5197923287db20a58125f0bc85c062f7f2c892de97b18c356f9efb14b28524"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 3.0.6",
+ "syn 3.0.7",
 ]
 
 [[package]]
@@ -630,18 +661,18 @@ checksum = "1ebf944e87a7c253233ad6766e082e3cd714b5d03812acc24c318f549614536e"
 
 [[package]]
 name = "zerocopy"
-version = "0.8.59"
+version = "0.8.62"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6df92bf3d9227be3d53173901ddbffac2babc27ae50f397776ffd6dc33f800cb"
+checksum = "86502bf56ac7c77571a32e2647bb2a15894565e981fb2a48d7bde2d91c965a9d"
 dependencies = [
  "zerocopy-derive",
 ]
 
 [[package]]
 name = "zerocopy-derive"
-version = "0.8.59"
+version = "0.8.62"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac4f328cf2f05d084e496c3e9c3f33ed0a183656a16e1fcec4d464d8373aec82"
+checksum = "5457206954b06561e2608c7e19cf58b1926586d999c246eebe4502f7e2039d1a"
 dependencies = [
  "proc-macro2",
  "quote",

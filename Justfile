@@ -27,6 +27,10 @@ check:
 test:
 	{{cargo}} test --workspace --lib --bins --tests --examples {{test_features}}
 
+[group('test')]
+ntest:
+        {{cargo}} nextest run --release --no-fail-fast --workspace --lib --bins --examples --all-features
+
 # ----------------------------------------------------------------------
 # LINT
 # ----------------------------------------------------------------------
