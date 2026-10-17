@@ -347,8 +347,8 @@ fn parse_scalable_channel_config(
             let flags = br.read_bits_u8(6)?;
             br.skip_bits(2)?;
             let raw_bits = br.read_bits(16)?;
-            let gain_bits = u16::try_from(raw_bits).map_err(|_| {
-                IamfError::ParseError(format!("output_gain {raw_bits} exceeds 16 bits"))
+            let gain_bits = u16::try_from(raw_bits).map_err(|error| {
+                IamfError::ParseError(format!("output_gain {raw_bits} exceeds 16 bits: {error}"))
             })?;
             let raw = i16::from_be_bytes(gain_bits.to_be_bytes());
             (flags, f32::from(raw) / 256.0)

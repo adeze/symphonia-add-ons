@@ -76,8 +76,8 @@ impl<'a> BitReader<'a> {
             )));
         }
         let value = self.read_bits(n)?;
-        u8::try_from(value).map_err(|_| {
-            IamfError::ParseError(format!("BitReader: {n}-bit value {value} exceeds u8"))
+        u8::try_from(value).map_err(|error| {
+            IamfError::ParseError(format!("BitReader: {n}-bit value {value} exceeds u8: {error}"))
         })
     }
 
