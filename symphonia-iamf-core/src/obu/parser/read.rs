@@ -26,7 +26,9 @@ pub fn read_leb128(data: &[u8]) -> IamfResult<(u64, usize)> {
 pub(super) fn read_leb128_u32(data: &[u8], pos: &mut usize) -> IamfResult<u32> {
     let (val, consumed) = read_leb128(&data[*pos..])?;
     *pos += consumed;
-    u32::try_from(val).map_err(|_| IamfError::ParseError(format!("leb128 value {val} exceeds u32")))
+    u32::try_from(val).map_err(|error| {
+        IamfError::ParseError(format!("leb128 value {val} exceeds u32: {error}"))
+    })
 }
 
 pub(super) fn read_u8(data: &[u8], pos: &mut usize) -> IamfResult<u8> {
